@@ -145,7 +145,7 @@ def run(argv=None, save_main_session=True):
     
     table_schema = parse_table_schema_from_json(json.dumps(json.load(open("schema.json"))["schema"]))
     
-    classified_data |   'Write to Big Query' >> beam.io.WriteToBigQuery(classified_data, schema=table_schema, create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED,write_disposition=beam.io.BigQueryDisposition.WRITE_APPEND)
+    classified_data |   'Write to Big Query' >> beam.io.WriteToBigQuery(known_args.output_table, schema=table_schema, create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED,write_disposition=beam.io.BigQueryDisposition.WRITE_APPEND)
     
     result = p.run()
     result.wait_until_finish()
