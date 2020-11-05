@@ -124,8 +124,8 @@ def run(argv=None, save_main_session=True):
     google_cloud_options = pipeline_options.view_as(GoogleCloudOptions)
     
     google_cloud_options.project = 'gft-app-294621'
-    google_cloud_options.job_name = 'gft_app'
-        # Uncomment below and add your bucket if you want to execute on Dataflow
+    google_cloud_options.job_name = 'gftapp'
+    # Uncomment below and add your bucket if you want to execute on Dataflow
     google_cloud_options.staging_location = 'gs://audio_app/binaries'
     google_cloud_options.temp_location = 'gs://audio_app/temp'
     google_cloud_options.region ='europe-west1'
@@ -135,7 +135,7 @@ def run(argv=None, save_main_session=True):
     
     pipeline_options.view_as(SetupOptions).save_main_session = save_main_session
     
-    p = beam.Pipeline(options=options)
+    p = beam.Pipeline(options=pipeline_options)
     
     data = (p | 'Read from PubSub' >> beam.io.ReadFromPubSub(subscription=known_args.input_subscription))
     
