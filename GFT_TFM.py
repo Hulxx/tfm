@@ -37,6 +37,7 @@ class Model():
         model_dir = 'D:/MDA/TFM/gft/modelsaved.h5'
         model = tf.keras.models.load_model(model_dir)
         model = model.compile()
+        example_audio_path = 'D:/MDA/TFM/gft/temp/wave.wav'
         print('Model loaded')
 
 
@@ -53,7 +54,6 @@ class preprocessAudio(beam.DoFn):
         wav_file = open("wave.wav", "wb")
         decode_string = base64.b64decode(payload)
         wav_file.write(decode_string)
-        example_audio_path = (model_dir)
         feature = []
         
         def parser(file_path):
