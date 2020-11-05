@@ -101,13 +101,13 @@ def run(argv=None, save_main_session=True):
     #1 Replace your hackathon-edem with your project id
     parser.add_argument('--input_topic',
                       dest='input_topic',
-                      default='projects/hackaton-salim/topics/valenbisi',
+                      default='projects/gft-app-294621/topics/audio_topic',
                       help='Input file to process.')
     
     #2 Replace your hackathon-edem with your project id
     parser.add_argument('--input_subscription',
                       dest='input_subscription',
-                      default='projects/hackaton-salim/subscriptions/streaming',
+                      default='projects/gft-app-294621/subscriptions/audio_sub',
                       help='Input Subscription')
     
     parser.add_argument('--output_table', 
@@ -125,10 +125,10 @@ def run(argv=None, save_main_session=True):
     
     google_cloud_options.project = 'gft-app-294621'
     google_cloud_options.job_name = 'gft_app'
-    
-    # Uncomment below and add your bucket if you want to execute on Dataflow
+        # Uncomment below and add your bucket if you want to execute on Dataflow
     google_cloud_options.staging_location = 'gs://audio_app/binaries'
     google_cloud_options.temp_location = 'gs://audio_app/temp'
+    google_cloud_options.region ='europe-west1'
     
     pipeline_options.view_as(StandardOptions).runner = 'DataflowRunner'
     pipeline_options.view_as(StandardOptions).streaming = True
