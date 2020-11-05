@@ -34,7 +34,7 @@ from sklearn.svm import SVC
 
 class Model():
     def __init__(self):
-        model_dir = 'D:\MDA\TFM'
+        model_dir = 'D:/MDA/TFM/gft/modelsaved.h5'
         model = tf.keras.models.load_model(model_dir)
         model = model.compile()
         print('Model loaded')
