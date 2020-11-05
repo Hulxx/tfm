@@ -4,8 +4,6 @@ Created on Wed Nov  4 23:56:27 2020
 
 @author: Usuario
 """
-pip install requirements.txt
-
 from __future__ import absolute_import
 import argparse
 import logging
@@ -21,7 +19,7 @@ import pandas as pd
 import random
 import time
 import base64
-import librosa
+#import librosa
 import numpy as np
 
 from keras.models import load_model
@@ -46,8 +44,9 @@ class preprocessAudio(beam.DoFn):
     def process(self, element):
         
         start = time.time()
-        longitud = random.uniform(36.6254,43.26271)
-        latitud = random.uniform(-6.97061,-0.37739)
+        lon = random.uniform(36.6254,43.26271)
+        lat = random.uniform(-6.97061,-0.37739)
+        geo = "{},{}".format(lat,lon)
         item = json.loads(element)
         key = vars.json['params'][1]
         payload = key.get('soundFileContent')
@@ -79,8 +78,7 @@ class preprocessAudio(beam.DoFn):
                  item["params"][0]["userid"],
                  item["params"][1]["soundFileContent"],
                  item["params"][2]["filename"],
-                 longitud,
-                 latitud,
+                 geo,
                  elaspedtime)]
 
 class audioClassifier(beam.DoFn):
@@ -93,26 +91,53 @@ class audioClassifier(beam.DoFn):
         predicted_class_indices=np.argmax(pred,axis=1)
         
         return [(item["params"][2]["filename"],
-                longitud,
-                latitude,
+                geo,
                 elaspedtime,
                 predicted_class_indices)]
 
-def run(argv=None):
-    """Build and run pipeline."""
+def run(argv=None, save_main_session=True):
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        '--audio_topic',
-        default = 'projects/gft-app-29461/topics/audio_topic')
     
-    args, pipeline_args = parser.parse_known_args(argv)
-    options = PipelineOptions(pipeline_args)
-    options.view_as(SetupOptions).save_main_session = True
-    options.view_as(StandardOptions).streaming = True
+    #1 Replace your hackathon-edem with your project id
+    parser.add_argument('--input_topic',
+                      dest='input_topic',
+                      default='projects/hackaton-salim/topics/valenbisi',
+                      help='Input file to process.')
+    
+    #2 Replace your hackathon-edem with your project id
+    parser.add_argument('--input_subscription',
+                      dest='input_subscription',
+                      default='projects/hackaton-salim/subscriptions/streaming',
+                      help='Input Subscription')
+    
+    parser.add_argument('--output_table', 
+                        required=True,
+                        dest='gft-app-294621:audios_dataset.classified_data',
+                        help=
+                        ('Output BigQuery table for results specified as: PROJECT:DATASET.TABLE '
+                        'or DATASET.TABLE.'))
+    
+    known_args, pipeline_args = parser.parse_known_args(argv)
+    
+    pipeline_options = PipelineOptions(pipeline_args)
+    
+    google_cloud_options = pipeline_options.view_as(GoogleCloudOptions)
+    
+    google_cloud_options.project = 'gft-app-294621'
+    google_cloud_options.job_name = 'gft_app'
+    
+    # Uncomment below and add your bucket if you want to execute on Dataflow
+    google_cloud_options.staging_location = 'gs://audio_app/binaries'
+    google_cloud_options.temp_location = 'gs://audio_app/temp'
+    
+    pipeline_options.view_as(StandardOptions).runner = 'DataflowRunner'
+    pipeline_options.view_as(StandardOptions).streaming = True
+    
+    pipeline_options.view_as(SetupOptions).save_main_session = save_main_session
     
     p = beam.Pipeline(options=options)
     
-    data = (p | 'Read from PubSub' >> beam.io.ReadFromPubSub(topic=args.topic) | 'Parse Json to Dict' >> beam.io.Map(lambda e: json.loads(e)))
+    data = (p | 'Read from PubSub' >> beam.io.ReadFromPubSub(subscription=known_args.input_subscription))
     
     processed_data = (data | beam.ParDo(preprocessAudio()))
     
