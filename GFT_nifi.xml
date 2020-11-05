@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<template encoding-version="1.3">
+    <description></description>
+    <groupId>8e601615-0175-1000-cefd-d5af0ba5749d</groupId>
+    <name>GFT_nifi</name>
+    <snippet>
+        <connections>
+            <id>bdf9a6b3-4f45-339d-0000-000000000000</id>
+            <parentGroupId>14db776e-d28a-309d-0000-000000000000</parentGroupId>
+            <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+            <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+            <destination>
+                <groupId>14db776e-d28a-309d-0000-000000000000</groupId>
+                <id>2ab146f6-5038-3442-0000-000000000000</id>
+                <type>PROCESSOR</type>
+            </destination>
+            <flowFileExpiration>0 sec</flowFileExpiration>
+            <labelIndex>1</labelIndex>
+            <loadBalanceCompression>DO_NOT_COMPRESS</loadBalanceCompression>
+            <loadBalancePartitionAttribute></loadBalancePartitionAttribute>
+            <loadBalanceStatus>LOAD_BALANCE_NOT_CONFIGURED</loadBalanceStatus>
+            <loadBalanceStrategy>DO_NOT_LOAD_BALANCE</loadBalanceStrategy>
+            <name></name>
+            <selectedRelationships>Message</selectedRelationships>
+            <source>
+                <groupId>14db776e-d28a-309d-0000-000000000000</groupId>
+                <id>149d3286-abbc-3342-0000-000000000000</id>
+                <type>PROCESSOR</type>
+            </source>
+            <zIndex>0</zIndex>
+        </connections>
+        <controllerServices>
+            <id>df685a13-bf67-3603-0000-000000000000</id>
+            <parentGroupId>14db776e-d28a-309d-0000-000000000000</parentGroupId>
+            <bundle>
+                <artifact>nifi-gcp-nar</artifact>
+                <group>org.apache.nifi</group>
+                <version>1.12.1</version>
+            </bundle>
+            <comments></comments>
+            <descriptors>
+                <entry>
+                    <key>application-default-credentials</key>
+                    <value>
+                        <name>application-default-credentials</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>compute-engine-credentials</key>
+                    <value>
+                        <name>compute-engine-credentials</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>service-account-json-file</key>
+                    <value>
+                        <name>service-account-json-file</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>service-account-json</key>
+                    <value>
+                        <name>service-account-json</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>proxy-configuration-service</key>
+                    <value>
+                        <identifiesControllerService>org.apache.nifi.proxy.ProxyConfigurationService</identifiesControllerService>
+                        <name>proxy-configuration-service</name>
+                    </value>
+                </entry>
+            </descriptors>
+            <name>GCPCredentialsControllerService</name>
+            <persistsState>false</persistsState>
+            <properties>
+                <entry>
+                    <key>application-default-credentials</key>
+                    <value>false</value>
+                </entry>
+                <entry>
+                    <key>compute-engine-credentials</key>
+                    <value>false</value>
+                </entry>
+                <entry>
+                    <key>service-account-json-file</key>
+                </entry>
+                <entry>
+                    <key>service-account-json</key>
+                </entry>
+                <entry>
+                    <key>proxy-configuration-service</key>
+                </entry>
+            </properties>
+            <state>ENABLED</state>
+            <type>org.apache.nifi.processors.gcp.credentials.service.GCPCredentialsControllerService</type>
+        </controllerServices>
+        <processors>
+            <id>149d3286-abbc-3342-0000-000000000000</id>
+            <parentGroupId>14db776e-d28a-309d-0000-000000000000</parentGroupId>
+            <position>
+                <x>0.0</x>
+                <y>0.0</y>
+            </position>
+            <bundle>
+                <artifact>nifi-mqtt-nar</artifact>
+                <group>org.apache.nifi</group>
+                <version>1.12.1</version>
+            </bundle>
+            <config>
+                <bulletinLevel>WARN</bulletinLevel>
+                <comments></comments>
+                <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                <descriptors>
+                    <entry>
+                        <key>Broker URI</key>
+                        <value>
+                            <name>Broker URI</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Client ID</key>
+                        <value>
+                            <name>Client ID</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Username</key>
+                        <value>
+                            <name>Username</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Password</key>
+                        <value>
+                            <name>Password</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>SSL Context Service</key>
+                        <value>
+                            <identifiesControllerService>org.apache.nifi.ssl.SSLContextService</identifiesControllerService>
+                            <name>SSL Context Service</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Last Will Topic</key>
+                        <value>
+                            <name>Last Will Topic</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Last Will Message</key>
+                        <value>
+                            <name>Last Will Message</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Last Will Retain</key>
+                        <value>
+                            <name>Last Will Retain</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Last Will QoS Level</key>
+                        <value>
+                            <name>Last Will QoS Level</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Session state</key>
+                        <value>
+                            <name>Session state</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>MQTT Specification Version</key>
+                        <value>
+                            <name>MQTT Specification Version</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Connection Timeout (seconds)</key>
+                        <value>
+                            <name>Connection Timeout (seconds)</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Keep Alive Interval (seconds)</key>
+                        <value>
+                            <name>Keep Alive Interval (seconds)</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Group ID</key>
+                        <value>
+                            <name>Group ID</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Topic Filter</key>
+                        <value>
+                            <name>Topic Filter</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Quality of Service(QoS)</key>
+                        <value>
+                            <name>Quality of Service(QoS)</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Max Queue Size</key>
+                        <value>
+                            <name>Max Queue Size</name>
+                        </value>
+                    </entry>
+                </descriptors>
+                <executionNode>ALL</executionNode>
+                <lossTolerant>false</lossTolerant>
+                <penaltyDuration>30 sec</penaltyDuration>
+                <properties>
+                    <entry>
+                        <key>Broker URI</key>
+                        <value>tcp://broker.hivemq.com:1883</value>
+                    </entry>
+                    <entry>
+                        <key>Client ID</key>
+                        <value>carles</value>
+                    </entry>
+                    <entry>
+                        <key>Username</key>
+                    </entry>
+                    <entry>
+                        <key>Password</key>
+                    </entry>
+                    <entry>
+                        <key>SSL Context Service</key>
+                    </entry>
+                    <entry>
+                        <key>Last Will Topic</key>
+                    </entry>
+                    <entry>
+                        <key>Last Will Message</key>
+                    </entry>
+                    <entry>
+                        <key>Last Will Retain</key>
+                    </entry>
+                    <entry>
+                        <key>Last Will QoS Level</key>
+                    </entry>
+                    <entry>
+                        <key>Session state</key>
+                        <value>true</value>
+                    </entry>
+                    <entry>
+                        <key>MQTT Specification Version</key>
+                        <value>0</value>
+                    </entry>
+                    <entry>
+                        <key>Connection Timeout (seconds)</key>
+                        <value>30</value>
+                    </entry>
+                    <entry>
+                        <key>Keep Alive Interval (seconds)</key>
+                        <value>60</value>
+                    </entry>
+                    <entry>
+                        <key>Group ID</key>
+                    </entry>
+                    <entry>
+                        <key>Topic Filter</key>
+                        <value>testtopic/gft1234</value>
+                    </entry>
+                    <entry>
+                        <key>Quality of Service(QoS)</key>
+                        <value>2</value>
+                    </entry>
+                    <entry>
+                        <key>Max Queue Size</key>
+                        <value>10</value>
+                    </entry>
+                </properties>
+                <runDurationMillis>0</runDurationMillis>
+                <schedulingPeriod>0 sec</schedulingPeriod>
+                <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                <yieldDuration>1 sec</yieldDuration>
+            </config>
+            <executionNodeRestricted>false</executionNodeRestricted>
+            <name>ConsumeMQTT</name>
+            <relationships>
+                <autoTerminate>false</autoTerminate>
+                <name>Message</name>
+            </relationships>
+            <state>STOPPED</state>
+            <style/>
+            <type>org.apache.nifi.processors.mqtt.ConsumeMQTT</type>
+        </processors>
+        <processors>
+            <id>2ab146f6-5038-3442-0000-000000000000</id>
+            <parentGroupId>14db776e-d28a-309d-0000-000000000000</parentGroupId>
+            <position>
+                <x>0.0</x>
+                <y>376.0</y>
+            </position>
+            <bundle>
+                <artifact>nifi-gcp-nar</artifact>
+                <group>org.apache.nifi</group>
+                <version>1.12.1</version>
+            </bundle>
+            <config>
+                <bulletinLevel>WARN</bulletinLevel>
+                <comments></comments>
+                <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                <descriptors>
+                    <entry>
+                        <key>gcp-project-id</key>
+                        <value>
+                            <name>gcp-project-id</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>GCP Credentials Provider Service</key>
+                        <value>
+                            <identifiesControllerService>org.apache.nifi.gcp.credentials.service.GCPCredentialsService</identifiesControllerService>
+                            <name>GCP Credentials Provider Service</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>gcp-pubsub-topic</key>
+                        <value>
+                            <name>gcp-pubsub-topic</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>gcp-pubsub-publish-batch-size</key>
+                        <value>
+                            <name>gcp-pubsub-publish-batch-size</name>
+                        </value>
+                    </entry>
+                </descriptors>
+                <executionNode>ALL</executionNode>
+                <lossTolerant>false</lossTolerant>
+                <penaltyDuration>30 sec</penaltyDuration>
+                <properties>
+                    <entry>
+                        <key>gcp-project-id</key>
+                        <value>gft-app-294621</value>
+                    </entry>
+                    <entry>
+                        <key>GCP Credentials Provider Service</key>
+                        <value>df685a13-bf67-3603-0000-000000000000</value>
+                    </entry>
+                    <entry>
+                        <key>gcp-pubsub-topic</key>
+                        <value>projects/gft-app-294621/topics/audio_topic</value>
+                    </entry>
+                    <entry>
+                        <key>gcp-pubsub-publish-batch-size</key>
+                        <value>15</value>
+                    </entry>
+                </properties>
+                <runDurationMillis>0</runDurationMillis>
+                <schedulingPeriod>0 sec</schedulingPeriod>
+                <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                <yieldDuration>1 sec</yieldDuration>
+            </config>
+            <executionNodeRestricted>false</executionNodeRestricted>
+            <name>PublishGCPubSub</name>
+            <relationships>
+                <autoTerminate>true</autoTerminate>
+                <name>failure</name>
+            </relationships>
+            <relationships>
+                <autoTerminate>true</autoTerminate>
+                <name>retry</name>
+            </relationships>
+            <relationships>
+                <autoTerminate>true</autoTerminate>
+                <name>success</name>
+            </relationships>
+            <state>STOPPED</state>
+            <style/>
+            <type>org.apache.nifi.processors.gcp.pubsub.PublishGCPubSub</type>
+        </processors>
+    </snippet>
+    <timestamp>11/05/2020 01:58:45 CET</timestamp>
+</template>
